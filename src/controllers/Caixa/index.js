@@ -2,7 +2,7 @@ const Caixa = require('../../models/Caixa');
 
 exports.saldo = async (req, res)=>{
 
-    if(req.params.pessoa === undefined || req.params.pessoa == 0){
+    if(req.params.pessoa === undefined || req.params.pessoa == 0 || isNaN(req.params.pessoa)){
 
         res.status(400).send({
 
