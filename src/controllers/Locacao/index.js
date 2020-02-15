@@ -217,6 +217,16 @@ exports.reprovar = async (req, res)=>{
 }
 
 exports.getPorLocador = async (req, res)=>{
+
+    if(req.params.locador === undefined || req.params.locador == 0 || isNaN(req.params.locador)){
+
+        res.status(400).send({
+
+            message: "Informe o locador corretamente"
+
+        });
+        return;
+    }
     
     Locacao.getPorLocador(req.params.locador, (err, data)=>{
 
