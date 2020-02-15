@@ -122,6 +122,39 @@ exports.novo = async (req, res)=>{
 
 exports.listar = async (req, res)=>{
 
+    if(req.query.latitude === undefined || req.query.latitude.length == 0){
+        
+        res.status(400).send({
+                
+            message: "Informe a latitude corretamente"
+
+        });
+
+        return;
+    }
+
+    if(req.query.longitude === undefined || req.query.longitude.length == 0){
+        
+        res.status(400).send({
+                
+            message: "Informe a longitude corretamente"
+
+        });
+
+        return;
+    }
+
+    if(req.query.raio === undefined || req.query.raio.length == 0){
+        
+        res.status(400).send({
+                
+            message: "Informe o raio corretamente"
+
+        });
+
+        return;
+    }
+    
     req.query.longitude = parseFloat(req.query.longitude);
     req.query.latitude  = parseFloat(req.query.latitude);
     req.query.raio      = parseInt(req.query.raio);
