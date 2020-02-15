@@ -3,50 +3,118 @@ const isValidCoordinates = require('is-valid-coordinates')
 
 exports.novo = async (req, res)=>{
 
-    req.body.longitude = parseFloat(req.body.longitude);
-    req.body.latitude  = parseFloat(req.body.latitude);
-    
-    if(!isValidCoordinates(req.body.longitude, req.body.latitude)){
-       
-        res.status(400).send({
+    try{
+
+        if(req.body.longitude === undefined || req.body.longitude === 0){
+
+            res.status(400).send({
+
+                message: "Informe a longitude"
+
+            })
+            return;
+        }
+
+        if(req.body.latitude === undefined || req.body.latitude === 0){
+
+            res.status(400).send({
+
+                message: "Informe a longitude"
+
+            })
+            return;
+        }
+
+        req.body.longitude = parseFloat(req.body.longitude);
+        req.body.latitude  = parseFloat(req.body.latitude);
+
+        if(req.body.descricao === undefined || req.body.descricao.length == 0){
             
-            message: "Coordenadas inválidas"
+            res.status(400).send({
 
-        });
+                message: "Informe a descrição"
 
-    } else {
+            });
 
-        Imovel.novo(req.body, (err, data)=>{
+            return;
 
-            if(err){
+        }
 
-                if(err.kind === "not_found"){
+        if(req.body.valor === undefined || req.body.valor == 0){
+            
+            res.status(400).send({
 
-                    res.status(404).send(
+                message: "Informe o valor"
 
-                        {message: "Imóvel não existe"}
+            });
 
-                    );
+            return;
+
+        }
+
+        if(req.body.locador === undefined || req.body.locador == 0){
+            
+            res.status(400).send({
+
+                message: "Informe o locador"
+
+            });
+
+            return;
+
+        }
+        
+        if(!isValidCoordinates(req.body.longitude, req.body.latitude)){
+        
+            res.status(400).send({
+                
+                message: "Coordenadas inválidas"
+
+            });
+
+        } else {
+
+            Imovel.novo(req.body, (err, data)=>{
+
+                if(err){
+
+                    if(err.kind === "not_found"){
+
+                        res.status(404).send(
+
+                            {message: "Imóvel não existe"}
+
+                        );
+
+                    } else {
+
+                        res.status(500).send({                    
+                            message: "Erro ao cadastrar imóvel"
+                        });
+
+                    }
 
                 } else {
 
-                    res.status(500).send({                    
-                        message: "Erro ao cadastrar imóvel"
+                    res.status(200).send({
+
+                        message: "Operação executada com sucesso"
+
                     });
 
                 }
 
-            } else {
+            });
 
-                res.status(200).send({
+        }
 
-                    message: "Operação executada com sucesso"
+    }catch(e){
 
-                });
+        res.status(500).send({
 
-            }
+            message: e.message
 
-        });
+        })
 
     }
 
