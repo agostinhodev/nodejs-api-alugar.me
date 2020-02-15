@@ -1,6 +1,78 @@
 const Locacao = require('../../models/Locacao');
 
 exports.novo = async (req, res)=>{
+
+    if(req.body.imovel === undefined || req.body.imovel.length == 0){
+
+        res.status(400).send(
+
+            {message: "Informe o id do imóvel corretamente"}
+
+        );
+
+        return;
+
+    }
+
+    if(req.body.locatario === undefined || req.body.locatario.length == 0){
+
+        res.status(400).send(
+
+            {message: "Informe o id do locatário corretamente"}
+
+        );
+
+        return;
+
+    }
+
+    if(req.body.inicio === undefined || req.body.inicio.length == 0){
+
+        res.status(400).send(
+
+            {message: "Informe a data de início do período de aluguel corretamente"}
+
+        );
+
+        return;
+
+    }
+
+    if(req.body.termino === undefined || req.body.termino.length == 0){
+
+        res.status(400).send(
+
+            {message: "Informe a data de término do período de aluguel corretamente"}
+
+        );
+
+        return;
+
+    }
+
+    if(req.body.valor === undefined || req.body.valor.length == 0){
+
+        res.status(400).send(
+
+            {message: "Informe o valor que você deseja pagar corretamente"}
+
+        );
+
+        return;
+
+    }
+
+    if(req.body.dia_vencimento === undefined || req.body.dia_vencimento.length == 0){
+
+        res.status(400).send(
+
+            {message: "Informe o dia do vencimento corretamente"}
+
+        );
+
+        return;
+
+    }
     
     Locacao.novo(req.body, (err, data)=>{
 
