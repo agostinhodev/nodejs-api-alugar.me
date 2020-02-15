@@ -189,6 +189,16 @@ exports.pendentes = async (req, res)=>{
 }
 
 exports.reprovar = async (req, res)=>{
+
+    if(req.body.locacao === undefined || req.body.locacao.length == 0){
+
+        res.status(400).send({
+
+            message: "Informe o id da locação"
+
+        })
+        return;
+    }
     
     Locacao.reprovar(req.body.locacao, (err, data)=>{
 
