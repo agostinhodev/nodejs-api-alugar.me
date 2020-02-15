@@ -137,6 +137,16 @@ exports.aprovar = async (req, res)=>{
 }
 
 exports.pendentes = async (req, res)=>{
+
+    if(req.query.pessoa === undefined || req.query.pessoa.length == 0){
+
+        res.status(400).send({
+
+            message: "Informe o id do locador (pessoa) corretamente"
+
+        })
+        return;
+    }
     
     Locacao.pendentes(req.query.pessoa, (err, data)=>{
 
