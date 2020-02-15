@@ -105,6 +105,16 @@ exports.novo = async (req, res)=>{
 }
 
 exports.aprovar = async (req, res)=>{
+
+    if(req.body.locacao === undefined || req.body.locacao.length == 0){
+
+        res.status(400).send({
+
+            message: "Informe o id da locação"
+
+        })
+        return;
+    }
     
     Locacao.aprovar(req.body, (err, data)=>{
 
