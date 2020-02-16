@@ -11,5 +11,6 @@ require("./routes/imovel.routes.js")(app);
 require("./routes/locacao.routes.js")(app);
 require("./routes/caixa.routes.js")(app);
 require("./routes/banco.routes.js")(app);
+require("./routes/boleto.routes.js")(app);
 
 app.listen(3131);

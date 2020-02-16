@@ -17,6 +17,7 @@ module.exports = async function novaTransacao(
         amount,
         "payment_method": "boleto",
         boleto_expiration_date,
+        postback_url: "http://alugar.me:3131/boleto/compensar",
         "customer":{
             
             "type": "individual",
