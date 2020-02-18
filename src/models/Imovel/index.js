@@ -52,6 +52,7 @@ Imovel.listar = async (req, result)=>{
             descricao,
             latitude,
             longitude,
+            imovel_foto.foto,
             (
             6371 * acos (
                 cos ( radians(?) )
@@ -62,6 +63,10 @@ Imovel.listar = async (req, result)=>{
             )
             ) AS distancia
         FROM imovel
+        
+        LEFT JOIN imovel_foto ON
+        imovel.id = imovel_foto.imovel
+        
         WHERE status = 0
         HAVING distancia < ?
         ORDER BY distancia
@@ -84,38 +89,7 @@ Imovel.listar = async (req, result)=>{
 
             } else if(res.length){
                 
-                let imoveis = res;
-                
-                for(let i = 0; i < imoveis.length; i++){
-                    
-                    sql.query(
-
-                        `SELECT foto FROM imovel_foto WHERE imovel = ? LIMIT 1`,
-                        [ imoveis[i].id ],
-                        (err, res)=>{
-                            
-                            if(!err && res.length && res[0].foto !== undefined && res[0].foto !== null){
-                                
-                                imoveis[i].foto = res[0].foto;
-
-                            }  else {
-
-                                imoveis[i].foto = null;
-
-                            }
-                            
-                            if((i) === (imoveis.length - 1)){
-                                
-                                result(null, imoveis);
-                                return;
-
-                            }
-
-                        }
-
-                    )
-
-                }
+                result(null, res);
 
             } else {
 
