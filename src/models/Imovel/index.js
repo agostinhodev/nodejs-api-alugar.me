@@ -81,18 +81,47 @@ Imovel.listar = async (req, result)=>{
             if(err){
 
                 result(err, null);
-                return;
 
-            }
+            } else if(res.length){
+                
+                let imoveis = res;
+                
+                for(let i = 0; i < imoveis.length; i++){
+                    
+                    sql.query(
 
-            if(res.length){
+                        `SELECT foto FROM imovel_foto WHERE imovel = ? LIMIT 1`,
+                        [ imoveis[i].id ],
+                        (err, res)=>{
+                            
+                            if(!err && res.length && res[0].foto !== undefined && res[0].foto !== null){
                                 
-                result(null, res);
-                return;
+                                imoveis[i].foto = res[0].foto;
+
+                            }  else {
+
+                                imoveis[i].foto = null;
+
+                            }
+                            
+                            if((i) === (imoveis.length - 1)){
+                                
+                                result(null, imoveis);
+                                return;
+
+                            }
+
+                        }
+
+                    )
+
+                }
+
+            } else {
+
+                result({kind: 'not_found'}, null);
 
             }
-
-            result({kind: 'not_found'}, null);
 
         }
 

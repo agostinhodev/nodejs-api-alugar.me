@@ -8,6 +8,7 @@ module.exports = app =>{
 
     //Lista as locações na visão do locador
     app.get('/locacao/locador/:locador', locacao.getPorLocador);
+    //Lista as locações na visão do locatário
     app.get('/locacao/locatario/:locatario', locacao.getPorLocatario);
 
 };
