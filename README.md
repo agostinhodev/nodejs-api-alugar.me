@@ -11,7 +11,7 @@
 ## Visão Geral
 
 <a href="http://alugar.me/" target="_blank">alugar.me</a> é um aplicativo que permite o aluguel de imóveis de forma fácil e descomplicada para universitários. Porém vale ressaltar que este repositório
-contém apenas o código da API. Para acessar o código do aplicativo, <a href="http://alugar.me/">Clique aqui</a>
+contém apenas o código da API. Para acessar o código do aplicativo, <a href="https://github.com/devmenegatti/alugarme/" target="_blank">Clique aqui</a>
 
 ## Contribuindo
 
