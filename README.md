@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="http://alugar.me/img/Full.png" width="200" alt="alugar.me" />
+  <img src="https://i.postimg.cc/wjkrtYVc/Full.png" width="200" alt="alugar.me" />
 </p>
 
 <h3 align="center">
